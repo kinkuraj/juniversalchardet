@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BasicFileEncodingDetectionTests {
+public class BasicFileEncodingDetectionTest {
 	
 	@Test
 	public void testUTF8 () throws IOException {
