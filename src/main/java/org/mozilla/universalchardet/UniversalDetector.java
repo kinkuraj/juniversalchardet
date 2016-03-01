@@ -38,12 +38,15 @@
 
 package org.mozilla.universalchardet;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import org.mozilla.universalchardet.prober.CharsetProber;
-import org.mozilla.universalchardet.prober.MBCSGroupProber;
-import org.mozilla.universalchardet.prober.SBCSGroupProber;
 import org.mozilla.universalchardet.prober.EscCharsetProber;
 import org.mozilla.universalchardet.prober.Latin1Prober;
-import org.mozilla.universalchardet.Constants;
+import org.mozilla.universalchardet.prober.MBCSGroupProber;
+import org.mozilla.universalchardet.prober.SBCSGroupProber;
 
 public class UniversalDetector
 {
@@ -292,6 +295,27 @@ public class UniversalDetector
         }
     }
     
+    
+    public static String detectCharset(File file) throws IOException {
+
+        try (FileInputStream fis = new FileInputStream(file)) {		
+        	
+        	byte[] buf = new byte[4096];
+
+	        UniversalDetector detector = new UniversalDetector(null);
+	
+	        int nread;
+	        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
+	            detector.handleData(buf, 0, nread);
+	        }
+	        detector.dataEnd();
+	
+	        String encoding = detector.getDetectedCharset();
+	        detector.reset();	        
+	        return encoding;	
+
+        } 
+    }
     
 
 }
