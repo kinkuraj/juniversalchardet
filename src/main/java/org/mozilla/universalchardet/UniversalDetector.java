@@ -293,32 +293,5 @@ public class UniversalDetector
     }
     
     
-    ////////////////////////////////////////////////////////////////
-    // testing
-    ////////////////////////////////////////////////////////////////
-    public static void main(String[] args) throws Exception
-    {
-        if (args.length != 1) {
-            System.out.println("USAGE: java UniversalDetector filename");
-            return;
-        }
 
-        UniversalDetector detector = new UniversalDetector(
-                new CharsetListener() {
-                    public void report(String name)
-                    {
-                        System.out.println("charset = " + name);
-                    }
-                }
-                );
-        
-        byte[] buf = new byte[4096];
-        java.io.FileInputStream fis = new java.io.FileInputStream(args[0]);
-        
-        int nread;
-        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
-            detector.handleData(buf, 0, nread);
-        }
-        detector.dataEnd();
-    }
 }
