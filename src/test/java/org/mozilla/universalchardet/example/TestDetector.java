@@ -41,41 +41,38 @@ import java.io.FileInputStream;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
-public class TestDetector
-{
-    public static void main(String[] args) throws java.io.IOException
-    {
-        if (args.length != 1) {
-            System.err.println("Usage: java TestDetector FILENAME");
-            System.exit(1);
-        }
-        
-        byte[] buf = new byte[4096];
-        String fileName = args[0];
-        try (FileInputStream fis = new java.io.FileInputStream(fileName)) {		
-        	
+public class TestDetector {
+	public static void main(String[] args) throws java.io.IOException {
+		if (args.length != 1) {
+			System.err.println("Usage: java TestDetector FILENAME");
+			System.exit(1);
+		}
 
-	        // (1)
-	        UniversalDetector detector = new UniversalDetector(null);
-	
-	        // (2)
-	        int nread;
-	        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
-	            detector.handleData(buf, 0, nread);
-	        }
-	        // (3)
-	        detector.dataEnd();
-	
-	        // (4)
-	        String encoding = detector.getDetectedCharset();
-	        if (encoding != null) {
-	            System.out.println("Detected encoding = " + encoding);
-	        } else {
-	            System.out.println("No encoding detected.");
-	        }
-	
-	        // (5)
-	        detector.reset();
-        }
-    }
+		byte[] buf = new byte[4096];
+		String fileName = args[0];
+		try (FileInputStream fis = new FileInputStream(fileName)) {
+
+			// (1)
+			UniversalDetector detector = new UniversalDetector(null);
+
+			// (2)
+			int nread;
+			while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
+				detector.handleData(buf, 0, nread);
+			}
+			// (3)
+			detector.dataEnd();
+
+			// (4)
+			String encoding = detector.getDetectedCharset();
+			if (encoding != null) {
+				System.out.println("Detected encoding = " + encoding);
+			} else {
+				System.out.println("No encoding detected.");
+			}
+
+			// (5)
+			detector.reset();
+		}
+	}
 }
