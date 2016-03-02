@@ -95,7 +95,7 @@ public abstract class CharDistributionAnalysis
         }
         
         if (this.totalChars != this.freqChars) {
-            float r = this.freqChars / (this.totalChars - this.freqChars) * this.typicalDistributionRatio;
+            float r = this.freqChars / ((this.totalChars - this.freqChars) * this.typicalDistributionRatio);
             
             if (r < SURE_YES) {
                 return r;
