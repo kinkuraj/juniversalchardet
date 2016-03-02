@@ -27,6 +27,7 @@ public final class Constants
     public static final String CHARSET_UTF_16LE     = "UTF-16LE".intern();
     public static final String CHARSET_UTF_32BE     = "UTF-32BE".intern();
     public static final String CHARSET_UTF_32LE     = "UTF-32LE".intern();
+    public static final String CHARSET_TIS620       = "TIS620".intern();
 
     // WARNING: Listed below are charsets which Java does not support.
     public static final String CHARSET_HZ_GB_2312   = "HZ-GB-2312".intern(); // Simplified Chinese

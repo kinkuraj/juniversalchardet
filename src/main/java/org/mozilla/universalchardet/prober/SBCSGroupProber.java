@@ -37,20 +37,21 @@
  * ***** END LICENSE BLOCK ***** */
 package org.mozilla.universalchardet.prober;
 
-import org.mozilla.universalchardet.prober.sequence.SequenceModel;
-import org.mozilla.universalchardet.prober.sequence.Win1251Model;
-import org.mozilla.universalchardet.prober.sequence.Koi8rModel;
-import org.mozilla.universalchardet.prober.sequence.Latin5Model;
-import org.mozilla.universalchardet.prober.sequence.MacCyrillicModel;
-import org.mozilla.universalchardet.prober.sequence.Ibm866Model;
-import org.mozilla.universalchardet.prober.sequence.Ibm855Model;
-import org.mozilla.universalchardet.prober.sequence.Latin7Model;
-import org.mozilla.universalchardet.prober.sequence.Win1253Model;
-import org.mozilla.universalchardet.prober.sequence.Latin5BulgarianModel;
-import org.mozilla.universalchardet.prober.sequence.Win1251BulgarianModel;
-import org.mozilla.universalchardet.prober.sequence.HebrewModel;
-
 import java.nio.ByteBuffer;
+
+import org.mozilla.universalchardet.prober.sequence.HebrewModel;
+import org.mozilla.universalchardet.prober.sequence.Ibm855Model;
+import org.mozilla.universalchardet.prober.sequence.Ibm866Model;
+import org.mozilla.universalchardet.prober.sequence.Koi8rModel;
+import org.mozilla.universalchardet.prober.sequence.Latin5BulgarianModel;
+import org.mozilla.universalchardet.prober.sequence.Latin5Model;
+import org.mozilla.universalchardet.prober.sequence.Latin7Model;
+import org.mozilla.universalchardet.prober.sequence.MacCyrillicModel;
+import org.mozilla.universalchardet.prober.sequence.SequenceModel;
+import org.mozilla.universalchardet.prober.sequence.ThaiModel;
+import org.mozilla.universalchardet.prober.sequence.Win1251BulgarianModel;
+import org.mozilla.universalchardet.prober.sequence.Win1251Model;
+import org.mozilla.universalchardet.prober.sequence.Win1253Model;
 
 public class SBCSGroupProber extends CharsetProber
 {
@@ -76,6 +77,7 @@ public class SBCSGroupProber extends CharsetProber
     private static final SequenceModel latin5BulgarianModel = new Latin5BulgarianModel();
     private static final SequenceModel win1251BulgarianModel = new Win1251BulgarianModel();
     private static final SequenceModel hebrewModel = new HebrewModel();
+    private static final SequenceModel thaiModel = new ThaiModel();
     
 
     ////////////////////////////////////////////////////////////////
@@ -85,8 +87,8 @@ public class SBCSGroupProber extends CharsetProber
     {
         super();
 
-        this.probers = new CharsetProber[13];
-        this.isActive = new boolean[13];
+        this.probers = new CharsetProber[14];
+        this.isActive = new boolean[14];
         
         this.probers[0] = new SingleByteCharsetProber(win1251Model);
         this.probers[1] = new SingleByteCharsetProber(koi8rModel);
@@ -98,12 +100,13 @@ public class SBCSGroupProber extends CharsetProber
         this.probers[7] = new SingleByteCharsetProber(win1253Model);
         this.probers[8] = new SingleByteCharsetProber(latin5BulgarianModel);
         this.probers[9] = new SingleByteCharsetProber(win1251BulgarianModel);
+        this.probers[10] = new SingleByteCharsetProber(thaiModel);
         
         HebrewProber hebprober = new HebrewProber();
-        this.probers[10] = hebprober;
-        this.probers[11] = new SingleByteCharsetProber(hebrewModel, false, hebprober);
-        this.probers[12] = new SingleByteCharsetProber(hebrewModel, true, hebprober);
-        hebprober.setModalProbers(this.probers[11], this.probers[12]);
+        this.probers[11] = hebprober;
+        this.probers[12] = new SingleByteCharsetProber(hebrewModel, false, hebprober);
+        this.probers[13] = new SingleByteCharsetProber(hebrewModel, true, hebprober);
+        hebprober.setModalProbers(this.probers[12], this.probers[13]);
         
         reset();
     }
