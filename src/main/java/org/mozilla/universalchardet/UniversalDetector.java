@@ -87,6 +87,10 @@ public class UniversalDetector
     ////////////////////////////////////////////////////////////////
     // methods
     ////////////////////////////////////////////////////////////////
+    
+    public UniversalDetector() {
+    	this(null);
+    }
     /**
      * @param listener a listener object that is notified of
      *         the detected encocoding. Can be null.
@@ -125,6 +129,10 @@ public class UniversalDetector
     public CharsetListener getListener()
     {
         return this.listener;
+    }
+    
+    public void handleData(final byte[] buf) {
+    	handleData(buf, 0, buf.length);
     }
     
     public void handleData(final byte[] buf, int offset, int length)
