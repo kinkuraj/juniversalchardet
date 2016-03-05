@@ -19,7 +19,10 @@ public final class ReaderFactory {
 		if (detectedEncoding != null) {
 			cs = Charset.forName(detectedEncoding);
 		}
-		return new InputStreamReader(new FileInputStream(file), cs);
+		if (!cs.toString().contains("UTF")) {
+			return new InputStreamReader(new FileInputStream(file), cs);
+		}
+		return new InputStreamReader(new UnicodeBOMInputStream(new FileInputStream(file)), cs);
 	}
 	public static Reader createReaderFromFile(File file) throws IOException {
 		return createReaderFromFile(file, Charset.defaultCharset());
