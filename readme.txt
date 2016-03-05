@@ -9,8 +9,9 @@ that is the encoding detector library of Mozilla.
 The original code of universalchardet is available at
 http://lxr.mozilla.org/seamonkey/source/extensions/universalchardet/
 
-Techniques used by universalchardet are described at
-http://www.mozilla.org/projects/intl/UniversalCharsetDetection.html
+new Mozilla repo is available at 
+http://hg.mozilla.org/mozilla-central/file/tip/extensions/universalchardet/
+
 
 
 2. Encodings that can be detected
@@ -115,6 +116,9 @@ they are based on. jchardet is based on the "chardet" module that has
 long existed. juniversalchardet is based on the "universalchardet" module
 that is new and generally provides better accuracy on detection results.
 
+- juniversalchardet  https://code.google.com/archive/p/juniversalchardet/
+
+The original repository of this project
 
 5. License
 
