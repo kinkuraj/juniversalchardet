@@ -19,7 +19,6 @@ http://www.mozilla.org/projects/intl/UniversalCharsetDetection.html
   - ISO-2022-CN
   - BIG-5
   - EUC-TW
-  - GB18030
   - HZ-GB-2312
 
 - Cyrillic

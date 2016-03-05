@@ -58,16 +58,15 @@ public class MBCSGroupProber extends CharsetProber
     {
         super();
         
-        this.probers = new CharsetProber[7];
-        this.isActive = new boolean[7];
+        this.probers = new CharsetProber[6];
+        this.isActive = new boolean[6];
         
         this.probers[0] = new UTF8Prober();
         this.probers[1] = new SJISProber();
         this.probers[2] = new EUCJPProber();
-        this.probers[3] = new GB18030Prober();
-        this.probers[4] = new EUCKRProber();
-        this.probers[5] = new Big5Prober();
-        this.probers[6] = new EUCTWProber();
+        this.probers[3] = new EUCKRProber();
+        this.probers[4] = new Big5Prober();
+        this.probers[5] = new EUCTWProber();
         
         reset();
     }
