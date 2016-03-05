@@ -53,7 +53,7 @@ public class TestDetector {
 		try (FileInputStream fis = new FileInputStream(fileName)) {
 
 			// (1)
-			UniversalDetector detector = new UniversalDetector(null);
+			UniversalDetector detector = new UniversalDetector();
 
 			// (2)
 			int nread;
