@@ -123,7 +123,7 @@ public class UTF8SMModel extends SMModel
         PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR),//68-6f 
         PkgInt.pack4bits(ERROR,ERROR,    9,    9,    9,    9,ERROR,ERROR),//70-77 
         PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR),//78-7f 
-        PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,ERROR,    9,ERROR,ERROR),//80-87 
+        PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,    9,    9,ERROR,ERROR),//80-87  // Allow emoji
         PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR),//88-8f 
         PkgInt.pack4bits(ERROR,ERROR,   12,   12,   12,   12,ERROR,ERROR),//90-97 
         PkgInt.pack4bits(ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR,ERROR),//98-9f 

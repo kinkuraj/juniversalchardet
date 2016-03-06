@@ -51,6 +51,12 @@ public class BasicStreamEncodingDetectionTest {
 	public void testWindows1255 () throws IOException {
 		Assert.assertEquals("WINDOWS-1255", getFileEncoding("windows1255.txt"));
 	}
+	
+	@Test
+	public void testUTF8Emoji () throws IOException {
+		Assert.assertEquals("UTF-8", getFileEncoding("utf8n-emoji.txt"));
+	}
+	
 		 
 	
 	private String getFileEncoding(String testFileName) throws IOException{
