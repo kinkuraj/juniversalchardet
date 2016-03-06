@@ -55,18 +55,22 @@ http://hg.mozilla.org/mozilla-central/file/tip/extensions/universalchardet/
 - Others
   - WINDOWS-1252
 
-All supported encodings are listed in org.mozilla.universalchardet.Constants.
+All supported encodings are listed in ``org.mozilla.universalchardet.Constants.``
 
 
 ## How to use it
 
 (1) Construct an instance of org.mozilla.universalchardet.UniversalDetector.
+
 (2) Feed some data (typically some thousand bytes) to the detector
     using UniversalDetector.handleData().
+    
 (3) Notify the detector of the end of data by using
     UniversalDetector.dataEnd().
+    
 (4) Get the detected encoding name by using
     UniversalDetector.getDetectedCharset().
+    
 (5) Don't forget to call UniversalDetector.reset() before you reuse
     the detector instance for another guess.
 
@@ -125,6 +129,7 @@ The original repository of this project
 ## License
 
 The library is subject to the Mozilla Public License Version 1.1.
+
 Alternatively, the library may be used under the terms of either
 the GNU General Public License Version 2 or later, or the GNU
 Lesser General Public License 2.1 or later.
