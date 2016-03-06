@@ -36,6 +36,24 @@ public class BasicFileEncodingDetectionTest {
 	
 	
 	
+	@Test
+	public void testBIG5 () throws IOException {
+		Assert.assertEquals("BIG5", getFileEncoding("big5.txt"));
+	}
+	
+	@Test
+	public void testEUCTW () throws IOException {
+		Assert.assertEquals("EUC-TW", getFileEncoding("euctw.txt"));
+	}
+	@Test
+	public void testEUCKR() throws IOException {
+		Assert.assertEquals("EUC-KR", getFileEncoding("euckr.txt"));
+	}
+	@Test
+	public void testWindows1255 () throws IOException {
+		Assert.assertEquals("WINDOWS-1255", getFileEncoding("windows1255.txt"));
+	}
+		 
 	
 	
 	private String getFileEncoding(String testFileName) throws IOException{
