@@ -112,6 +112,66 @@ public class TestDetector
 }
 ```
 
+### Detecting encoding of a File (simple way)
+
+```java
+
+import org.mozilla.universalchardet.UniversalDetector;
+
+public class TestDetectorFile {
+
+	public static void main (String[] args) throws java.io.IOException {
+		if (args.length != 1) {
+			System.err.println("Usage: java TestDetectorFile FILENAME");
+			System.exit(1);
+		}
+		java.io.File file = new java.io.File(args[0]);
+		String encoding = UniversalDetector.detectCharset(file);
+		if (encoding != null) {
+			System.out.println("Detected encoding = " + encoding);
+		} else {
+			System.out.println("No encoding detected.");
+		}
+	}
+}
+
+```
+
+### Creating a reader with correct encoding
+
+
+```java
+
+import org.mozilla.universalchardet.ReaderFactory;
+
+public class TestCreateReaderFromFile {
+	
+	public static void main (String[] args) throws java.io.IOException {
+		if (args.length != 1) {
+			System.err.println("Usage: java TestCreateReaderFromFile FILENAME");
+			System.exit(1);
+		}
+	
+		java.io.Reader reader = null;
+		try {
+			java.io.File file = new java.io.File(args[0]);
+			reader = ReaderFactory.createReaderFromFile(file);
+			
+			// Do whatever you want with the reader
+		}
+		finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		
+	}
+
+}
+
+```
+
+
 ## Related Works
 
 - jchardet  http://jchardet.sourceforge.net/
