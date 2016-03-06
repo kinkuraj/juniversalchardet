@@ -106,7 +106,7 @@ public class TestDetector
 }
 
 
-4. Related Woks
+4. Related Works
 
 - jchardet  http://jchardet.sourceforge.net/
 
