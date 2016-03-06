@@ -1,7 +1,7 @@
-juniversalchardet
+#juniversalchardet
 
 
-1. What is it?
+## What is it?
 
 juniversalchardet is a Java port of "universalchardet",
 that is the encoding detector library of Mozilla.
@@ -14,7 +14,7 @@ http://hg.mozilla.org/mozilla-central/file/tip/extensions/universalchardet/
 
 
 
-2. Encodings that can be detected
+## Encodings that can be detected
 
 - Chinese
   - ISO-2022-CN
@@ -58,7 +58,7 @@ http://hg.mozilla.org/mozilla-central/file/tip/extensions/universalchardet/
 All supported encodings are listed in org.mozilla.universalchardet.Constants.
 
 
-3. How to use it
+## How to use it
 
 (1) Construct an instance of org.mozilla.universalchardet.UniversalDetector.
 (2) Feed some data (typically some thousand bytes) to the detector
@@ -72,6 +72,8 @@ All supported encodings are listed in org.mozilla.universalchardet.Constants.
 
 
 ------------ Sample Code ------------
+
+```java
 import org.mozilla.universalchardet.UniversalDetector;
 
 public class TestDetector
@@ -104,9 +106,9 @@ public class TestDetector
     detector.reset();
   }
 }
+```
 
-
-4. Related Works
+## Related Works
 
 - jchardet  http://jchardet.sourceforge.net/
 
@@ -120,7 +122,7 @@ that is new and generally provides better accuracy on detection results.
 
 The original repository of this project
 
-5. License
+## License
 
 The library is subject to the Mozilla Public License Version 1.1.
 Alternatively, the library may be used under the terms of either
