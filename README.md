@@ -60,18 +60,18 @@ All supported encodings are listed in ``org.mozilla.universalchardet.Constants.`
 
 ## How to use it
 
-(1) Construct an instance of org.mozilla.universalchardet.UniversalDetector.
+(1) Construct an instance of ``org.mozilla.universalchardet.UniversalDetector``.
 
 (2) Feed some data (typically some thousand bytes) to the detector
-    using UniversalDetector.handleData().
+    using ``UniversalDetector.handleData()``.
     
 (3) Notify the detector of the end of data by using
-    UniversalDetector.dataEnd().
+    ``UniversalDetector.dataEnd()``.
     
 (4) Get the detected encoding name by using
-    UniversalDetector.getDetectedCharset().
+    ``UniversalDetector.getDetectedCharset()``.
     
-(5) Don't forget to call UniversalDetector.reset() before you reuse
+(5) Don't forget to call ``UniversalDetector.reset()`` before you reuse
     the detector instance for another guess.
 
 
