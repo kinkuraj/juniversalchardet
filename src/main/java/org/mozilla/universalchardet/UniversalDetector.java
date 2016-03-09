@@ -180,6 +180,8 @@ public class UniversalDetector
                         this.detectedCharset = Constants.CHARSET_UTF_16LE;
                     }
                     break;
+                default: 
+                	break;
                 } // swich end
                 
                 if (this.detectedCharset != null) {

@@ -139,70 +139,54 @@ public class UnicodeBOMInputStream extends InputStream {
    * @throws IOException on reading from the specified <code>InputStream</code>
    * when trying to detect the Unicode BOM.
    */
-  public UnicodeBOMInputStream(final InputStream inputStream, boolean skipIfFound) throws IOException
-  {
-    if (inputStream == null) {
-      throw new NullPointerException("invalid input stream: null is not allowed");
-    }
-    in = new PushbackInputStream(inputStream, 4);
+	public UnicodeBOMInputStream(final InputStream inputStream,
+			boolean skipIfFound) throws IOException {
+		if (inputStream == null) {
+			throw new NullPointerException(
+					"invalid input stream: null is not allowed");
+		}
+		in = new PushbackInputStream(inputStream, 4);
 
-    final byte  bom[] = new byte[4];
-    final int   read  = in.read(bom);
+		final byte bom[] = new byte[4];
+		final int read = in.read(bom);
 
-    switch(read)
-    {
-      case 4:
-        if ((bom[0] == (byte)0xFF) &&
-            (bom[1] == (byte)0xFE) &&
-            (bom[2] == (byte)0x00) &&
-            (bom[3] == (byte)0x00))
-        {
-          this.bom = BOM.UTF_32_LE;
-          break;
-        }
-        else
-        if ((bom[0] == (byte)0x00) &&
-            (bom[1] == (byte)0x00) &&
-            (bom[2] == (byte)0xFE) &&
-            (bom[3] == (byte)0xFF))
-        {
-          this.bom = BOM.UTF_32_BE;
-          break;
-        }
+		switch (read) {
+		case 4:
+			if ((bom[0] == (byte) 0xFF) && (bom[1] == (byte) 0xFE)
+					&& (bom[2] == (byte) 0x00) && (bom[3] == (byte) 0x00)) {
+				this.bom = BOM.UTF_32_LE;
+				break;
+			} else if ((bom[0] == (byte) 0x00) && (bom[1] == (byte) 0x00)
+					&& (bom[2] == (byte) 0xFE) && (bom[3] == (byte) 0xFF)) {
+				this.bom = BOM.UTF_32_BE;
+				break;
+			}
 
-      case 3:
-        if ((bom[0] == (byte)0xEF) &&
-            (bom[1] == (byte)0xBB) &&
-            (bom[2] == (byte)0xBF))
-        {
-          this.bom = BOM.UTF_8;
-          break;
-        }
+		case 3:
+			if ((bom[0] == (byte) 0xEF) && (bom[1] == (byte) 0xBB)
+					&& (bom[2] == (byte) 0xBF)) {
+				this.bom = BOM.UTF_8;
+				break;
+			}
 
-      case 2:
-        if ((bom[0] == (byte)0xFF) &&
-            (bom[1] == (byte)0xFE))
-        {
-          this.bom = BOM.UTF_16_LE;
-          break;
-        }
-        else
-        if ((bom[0] == (byte)0xFE) &&
-            (bom[1] == (byte)0xFF))
-        {
-          this.bom = BOM.UTF_16_BE;
-          break;
-        }
+		case 2:
+			if ((bom[0] == (byte) 0xFF) && (bom[1] == (byte) 0xFE)) {
+				this.bom = BOM.UTF_16_LE;
+				break;
+			} else if ((bom[0] == (byte) 0xFE) && (bom[1] == (byte) 0xFF)) {
+				this.bom = BOM.UTF_16_BE;
+				break;
+			}
 
-      default:
-        this.bom = BOM.NONE;
-        break;
-    }
+		default:
+			this.bom = BOM.NONE;
+			break;
+		}
 
 		if (read > 0) {
 			in.unread(bom, 0, read);
 		}
-		if (skipIfFound && getBOM() != BOM.NONE) {
+		if (skipIfFound) {
 			this.skipBOM();
 		}
 
@@ -228,9 +212,14 @@ public class UnicodeBOMInputStream extends InputStream {
    * @throws IOException when trying to skip the BOM from the wrapped
    * <code>InputStream</code> object.
    */
-	public final synchronized UnicodeBOMInputStream skipBOM() throws IOException {
+	public final synchronized UnicodeBOMInputStream skipBOM()
+			throws IOException {
 		if (!skipped) {
-			in.skip(bom.bytes.length);
+			long bytesToSkip = bom.bytes.length;
+			long bytesSkipped = in.skip(bytesToSkip);
+			for (long i = bytesSkipped; i < bytesToSkip; i++) {
+				in.read();
+			}
 			skipped = true;
 		}
 		return this;
@@ -240,6 +229,7 @@ public class UnicodeBOMInputStream extends InputStream {
    * {@inheritDoc}
    */
 	public int read() throws IOException {
+		this.skipped = true;
 		return in.read();
 	}
 
@@ -247,6 +237,7 @@ public class UnicodeBOMInputStream extends InputStream {
    * {@inheritDoc}
    */
 	public int read(final byte b[]) throws IOException {
+		this.skipped = true;
 		return in.read(b, 0, b.length);
 	}
 
@@ -254,6 +245,7 @@ public class UnicodeBOMInputStream extends InputStream {
    * {@inheritDoc}
    */
 	public int read(final byte b[], final int off, final int len) throws IOException {
+		this.skipped = true;
 		return in.read(b, off, len);
 	}
 
@@ -261,6 +253,7 @@ public class UnicodeBOMInputStream extends InputStream {
    * {@inheritDoc}
    */
 	public long skip(final long n) throws IOException {
+		this.skipped = true;
 		return in.skip(n);
 	}
 
@@ -300,4 +293,4 @@ public class UnicodeBOMInputStream extends InputStream {
 	}
 
 
-} // UnicodeBOMInputStream
+}

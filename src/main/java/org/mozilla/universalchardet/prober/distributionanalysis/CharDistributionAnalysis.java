@@ -56,7 +56,6 @@ public abstract class CharDistributionAnalysis
     private int         totalChars;
     protected int[]     charToFreqOrder; // set by subclasses
     protected float     typicalDistributionRatio; // set by subclasses
-    protected boolean   done; // set by subclasses and reset()
     
 
     ////////////////////////////////////////////////////////////////
@@ -107,7 +106,6 @@ public abstract class CharDistributionAnalysis
     
     public void reset()
     {
-        this.done = false;
         this.totalChars = 0;
         this.freqChars = 0;
     }
