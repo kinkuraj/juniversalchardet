@@ -3,11 +3,20 @@ package org.mozilla.universalchardet;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Stream that detect encoding while reading.
+ * The normal usage is to fully read from inputstream and call close before check for charset.
+ *
+ */
 public class EncodingDetectorInputStream extends InputStream {
 
 	private InputStream in;
 	private final UniversalDetector detector = new UniversalDetector(null);
 
+	/**
+	 * Create the stream
+	 * @param in The InputStream to read from
+	 */
 	public EncodingDetectorInputStream(InputStream in) {
 		this.in = in;
 	}
@@ -71,6 +80,10 @@ public class EncodingDetectorInputStream extends InputStream {
 		}
 	}
 
+	/**
+	 * Gets the detected charset, null if not yet detected.
+	 * @return The detected charset
+	 */
 	public String getDetectedCharset() {
 		return detector.getDetectedCharset();
 	}

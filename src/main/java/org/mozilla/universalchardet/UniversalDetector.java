@@ -100,15 +100,11 @@ public class UniversalDetector
         this.listener = listener;
         this.escCharsetProber = null;
         this.probers = new CharsetProber[3];
-        for (int i=0; i<this.probers.length; ++i) {
-            this.probers[i] = null;
-        }
         
         reset();
     }
     
-    public boolean isDone()
-    {
+    public boolean isDone() {
         return this.done;
     }
     
@@ -116,25 +112,30 @@ public class UniversalDetector
      * @return The detected encoding is returned. If the detector couldn't
      *          determine what encoding was used, null is returned.
      */
-    public String getDetectedCharset()
-    {
+    public String getDetectedCharset()  {
         return this.detectedCharset;
     }
     
-    public void setListener(CharsetListener listener)
-    {
+    public void setListener(CharsetListener listener)  {
         this.listener = listener;
     }
     
-    public CharsetListener getListener()
-    {
+    public CharsetListener getListener() {
         return this.listener;
     }
-    
+    /**
+     * Feed the detector with more data
+     * @param buf The buffer containing the data
+     */
     public void handleData(final byte[] buf) {
     	handleData(buf, 0, buf.length);
     }
-    
+    /**
+     * Feed the detector with more data
+     * @param buf Buffer with the data
+     * @param offset initial position of data in buf
+     * @param length length of data
+     */
     public void handleData(final byte[] buf, int offset, int length)
     {
         if (this.done) {
@@ -244,7 +245,9 @@ public class UniversalDetector
             // do nothing
         }
     }
-    
+    /**
+     * Marks end of data reading. Finish calculations.
+     */
     public void dataEnd()
     {
         if (!this.gotData) {
@@ -285,6 +288,9 @@ public class UniversalDetector
         }
     }
     
+    /**
+     * Resets detector to be used again.
+     */
     public void reset()
     {
         this.done = false;
@@ -305,6 +311,12 @@ public class UniversalDetector
         }
     }
     
+    /**
+     * Gets the charset of a File
+     * @param file The file to check charset for
+     * @return The charset of the file, null if cannot be determined
+     * @throws IOException if some IO error occurs
+     */
     
     public static String detectCharset(File file) throws IOException {
 
