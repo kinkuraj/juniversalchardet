@@ -172,6 +172,27 @@ public class TestCreateReaderFromFile {
 ```
 
 
+## Getting with maven
+
+Put this dependency in your pom.xml
+
+```xml
+<dependency>
+	<groupId>com.github.albfernandez</groupId>
+	<artifactId>juniversalchardet</artifactId>
+	<version>2.0.0</version>
+</dependency>
+
+```
+
+## Building from sources
+
+```bash
+    git clone https://github.com/albfernandez/juniversalchardet.git
+    cd juniversalchardet
+    mvn clean package
+```
+
 ## Related Works
 
 - jchardet  http://jchardet.sourceforge.net/
