@@ -88,7 +88,7 @@ public class TestDetector
     java.io.FileInputStream fis = new java.io.FileInputStream("test.txt");
 
     // (1)
-    UniversalDetector detector = new UniversalDetector(null);
+    UniversalDetector detector = new UniversalDetector();
 
     // (2)
     int nread;
