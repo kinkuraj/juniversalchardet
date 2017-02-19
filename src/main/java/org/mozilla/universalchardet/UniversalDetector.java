@@ -1,4 +1,8 @@
-/* ***** BEGIN LICENSE BLOCK *****
+/* 
+(C) Copyright 2016-2017 Alberto Fernández <infjaf@gmail.com>
+(C) Copyright 2006-2007 Kohei TAKETA <k-tak@void.in> (Java port)
+(C) Copyright 2001 Netscape Communications Corporation.
+
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
  * The contents of this file are subject to the Mozilla Public License Version
@@ -34,7 +38,8 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
- * ***** END LICENSE BLOCK ***** */
+ * 
+*/
 
 package org.mozilla.universalchardet;
 
