@@ -28,6 +28,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package org.mozilla.universalchardet;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -55,9 +56,9 @@ public final class ReaderFactory {
 			cs = Charset.forName(detectedEncoding);
 		}
 		if (!cs.toString().contains("UTF")) {
-			return new InputStreamReader(new FileInputStream(file), cs);
+			return new InputStreamReader(new BufferedInputStream(new FileInputStream(file)), cs);
 		}
-		return new InputStreamReader(new UnicodeBOMInputStream(new FileInputStream(file)), cs);
+		return new InputStreamReader(new UnicodeBOMInputStream(new BufferedInputStream(new FileInputStream(file))), cs);
 	}
 	/**
 	 * Create a reader from a file with correct encoding. If charset cannot be determined, 
