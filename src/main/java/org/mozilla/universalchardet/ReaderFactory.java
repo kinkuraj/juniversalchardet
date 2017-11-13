@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.util.Objects;
 
 /**
  * Create a reader from a file with correct encoding
@@ -50,8 +51,8 @@ public final class ReaderFactory {
 	 * @param defaultCharset defaultCharset to use if can't be determined
 	 */
 	public static Reader createReaderFromFile(File file, Charset defaultCharset) throws IOException {
+		Charset cs = Objects.requireNonNull(defaultCharset, "defaultCharset must be not null");
 		String detectedEncoding = UniversalDetector.detectCharset(file);
-		Charset cs = defaultCharset;
 		if (detectedEncoding != null) {
 			cs = Charset.forName(detectedEncoding);
 		}
