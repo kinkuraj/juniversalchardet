@@ -177,7 +177,7 @@ Put this dependency in your pom.xml
 <dependency>
 	<groupId>com.github.albfernandez</groupId>
 	<artifactId>juniversalchardet</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 </dependency>
 
 ```
