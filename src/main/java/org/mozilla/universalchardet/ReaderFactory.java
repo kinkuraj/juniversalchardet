@@ -51,6 +51,8 @@ public final class ReaderFactory {
 	 * Create a reader from a file with correct encoding
 	 * @param file The file to read from
 	 * @param defaultCharset defaultCharset to use if can't be determined
+	 * @return BufferedReader for the file with the correct encoding
+	 * @throws java.io.IOException if some I/O error ocurrs
 	 */
 	
 	public static BufferedReader createBufferedReader(File file, Charset defaultCharset) throws IOException {
@@ -69,25 +71,32 @@ public final class ReaderFactory {
 	 * Create a reader from a file with correct encoding. If charset cannot be determined, 
 	 * it uses the system default charset.
 	 * @param file The file to read from
+	 * @return BufferedReader for the file with the correct encoding
+	 * @throws java.io.IOException if some I/O error ocurrs
 	 */
 	public static BufferedReader createBufferedReader(File file) throws IOException {
 		return createBufferedReader(file, Charset.defaultCharset());
 	}
 	
 	/**
-	 * Create a reader from a file with correct encoding
+	 * Create a reader from a file with the correct encoding
 	 * @param file The file to read from
 	 * @param defaultCharset defaultCharset to use if can't be determined
+	 * @return Reader for the file with the correct encoding
+	 * @throws java.io.IOException if some I/O error ocurrs
 	 * @deprecated Use {@link #createBufferedReader(File, Charset)}
+	 * 	 
 	 */
 	@Deprecated
 	public static Reader createReaderFromFile(File file, Charset defaultCharset) throws IOException {
 		return createBufferedReader(file, defaultCharset);
 	}
 	/**
-	 * Create a reader from a file with correct encoding. If charset cannot be determined, 
+	 * Create a reader from a file with the correct encoding. If charset cannot be determined, 
 	 * it uses the system default charset.
 	 * @param file The file to read from
+	 * @return Reader for the file with the correct encoding
+	 * @throws java.io.IOException if some I/O error ocurrs
 	 * @deprecated Use {@link #createBufferedReader(File)}
 	 */
 	@Deprecated
