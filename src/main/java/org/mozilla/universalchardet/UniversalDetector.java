@@ -43,9 +43,11 @@
 
 package org.mozilla.universalchardet;
 
+import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 import org.mozilla.universalchardet.prober.CharsetProber;
 import org.mozilla.universalchardet.prober.EscCharsetProber;
@@ -325,7 +327,7 @@ public class UniversalDetector
     
     public static String detectCharset(File file) throws IOException {
 
-        try (FileInputStream fis = new FileInputStream(file)) {		
+        try (InputStream fis = new BufferedInputStream(Files.newInputStream(file.toPath()))) {		
         	
         	byte[] buf = new byte[4096];
 

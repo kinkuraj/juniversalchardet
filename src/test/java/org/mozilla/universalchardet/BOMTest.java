@@ -32,7 +32,7 @@ public class BOMTest {
         File file = new File(fileName);
         BufferedReader reader = null;
         try {
-        	reader = new BufferedReader(ReaderFactory.createReaderFromFile(file));
+        	reader = ReaderFactory.createBufferedReader(file);
         	// return first line
         	return reader.readLine();
         }

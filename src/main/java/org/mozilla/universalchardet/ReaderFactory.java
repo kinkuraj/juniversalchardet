@@ -29,12 +29,14 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package org.mozilla.universalchardet;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Objects;
 
 /**
@@ -50,22 +52,45 @@ public final class ReaderFactory {
 	 * @param file The file to read from
 	 * @param defaultCharset defaultCharset to use if can't be determined
 	 */
-	public static Reader createReaderFromFile(File file, Charset defaultCharset) throws IOException {
+	
+	public static BufferedReader createBufferedReader(File file, Charset defaultCharset) throws IOException {
 		Charset cs = Objects.requireNonNull(defaultCharset, "defaultCharset must be not null");
 		String detectedEncoding = UniversalDetector.detectCharset(file);
 		if (detectedEncoding != null) {
 			cs = Charset.forName(detectedEncoding);
 		}
 		if (!cs.toString().contains("UTF")) {
-			return new InputStreamReader(new BufferedInputStream(new FileInputStream(file)), cs);
+			return Files.newBufferedReader(file.toPath(), cs);			
 		}
-		return new InputStreamReader(new UnicodeBOMInputStream(new BufferedInputStream(new FileInputStream(file))), cs);
+		Path path = file.toPath();
+		return new BufferedReader(new InputStreamReader(new UnicodeBOMInputStream(new BufferedInputStream(Files.newInputStream(path))), cs));
 	}
 	/**
 	 * Create a reader from a file with correct encoding. If charset cannot be determined, 
 	 * it uses the system default charset.
 	 * @param file The file to read from
 	 */
+	public static BufferedReader createBufferedReader(File file) throws IOException {
+		return createBufferedReader(file, Charset.defaultCharset());
+	}
+	
+	/**
+	 * Create a reader from a file with correct encoding
+	 * @param file The file to read from
+	 * @param defaultCharset defaultCharset to use if can't be determined
+	 * @deprecated Use {@link #createBufferedReader(File, Charset)}
+	 */
+	@Deprecated
+	public static Reader createReaderFromFile(File file, Charset defaultCharset) throws IOException {
+		return createBufferedReader(file, defaultCharset);
+	}
+	/**
+	 * Create a reader from a file with correct encoding. If charset cannot be determined, 
+	 * it uses the system default charset.
+	 * @param file The file to read from
+	 * @deprecated Use {@link #createBufferedReader(File)}
+	 */
+	@Deprecated
 	public static Reader createReaderFromFile(File file) throws IOException {
 		return createReaderFromFile(file, Charset.defaultCharset());
 	}

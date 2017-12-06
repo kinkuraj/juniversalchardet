@@ -82,7 +82,7 @@ public class TestDetector
   public static void main(String[] args)
   {
     byte[] buf = new byte[4096];
-    java.io.FileInputStream fis = new java.io.FileInputStream("test.txt");
+    java.io.InputStream fis = java.nio.file.Files.newInputStream(java.nio.file.Paths.get("test.txt"));
 
     // (1)
     UniversalDetector detector = new UniversalDetector();
@@ -152,7 +152,7 @@ public class TestCreateReaderFromFile {
 		java.io.Reader reader = null;
 		try {
 			java.io.File file = new java.io.File(args[0]);
-			reader = ReaderFactory.createReaderFromFile(file);
+			reader = ReaderFactory.createBufferedReader(file);
 			
 			// Do whatever you want with the reader
 		}

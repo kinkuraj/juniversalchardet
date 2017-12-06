@@ -1,8 +1,9 @@
 package org.mozilla.universalchardet;
 
+import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class BasicStreamEncodingDetectionTest {
         EncodingDetectorInputStream edis = null;
         EncodingDetectorOutputStream edos = null;
         try {
-        	edis = new EncodingDetectorInputStream(new FileInputStream(file));        
+        	edis = new EncodingDetectorInputStream(new BufferedInputStream(Files.newInputStream(file.toPath())));        
 	        edos = new EncodingDetectorOutputStream(NullOutputStream.NULL_OUTPUT_STREAM);
 	        byte[] buffer = new byte[1024];
 	        int read = 0;

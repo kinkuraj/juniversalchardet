@@ -47,7 +47,7 @@ public class ReaderTest {
         File file = new File(fileName);
         BufferedReader reader = null;
         try {
-        	reader = new BufferedReader(ReaderFactory.createReaderFromFile(file));
+        	reader = ReaderFactory.createBufferedReader(file);
         	// Skip first line
         	reader.readLine();
         	// return second line
