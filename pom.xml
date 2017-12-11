@@ -44,6 +44,7 @@
 	</issueManagement>
 
 	<properties>
+		<compiler.level>1.7</compiler.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -72,8 +73,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${compiler.level}</source>
+					<target>${compiler.level}</target>
 				</configuration>
 			</plugin>
 
@@ -100,6 +101,9 @@
 				<version>3.0.2</version>
 				<configuration>
 					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>com.github.albfernandez.juniversalchardet</Automatic-Module-Name>
+						</manifestEntries>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
