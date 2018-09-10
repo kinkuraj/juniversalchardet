@@ -48,6 +48,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.mozilla.universalchardet.prober.CharsetProber;
 import org.mozilla.universalchardet.prober.EscCharsetProber;
@@ -319,32 +320,50 @@ public class UniversalDetector
     }
     
     /**
-     * Gets the charset of a File
+     * Gets the charset of a File.
+     *
      * @param file The file to check charset for
      * @return The charset of the file, null if cannot be determined
      * @throws IOException if some IO error occurs
      */
-    
     public static String detectCharset(File file) throws IOException {
-
-        try (InputStream fis = new BufferedInputStream(Files.newInputStream(file.toPath()))) {		
-        	
-        	byte[] buf = new byte[4096];
-
-	        UniversalDetector detector = new UniversalDetector(null);
-	
-	        int nread;
-	        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
-	            detector.handleData(buf, 0, nread);
-	        }
-	        detector.dataEnd();
-	
-	        String encoding = detector.getDetectedCharset();
-	        detector.reset();	        
-	        return encoding;	
-
-        } 
+        return detectCharset(file.toPath());
     }
-    
+
+    /**
+     * Gets the charset of a Path.
+     *
+     * @param path The path to file to check charset for
+     * @return The charset of the file, null if cannot be determined
+     * @throws IOException if some IO error occurs
+     */
+    public static String detectCharset(Path path) throws IOException {
+        try (InputStream fis = new BufferedInputStream(Files.newInputStream(path))) {
+            return detectCharset(fis);
+        }
+    }
+
+    /**
+     * Gets the charset of content from InputStream.
+     *
+     * @param inputStream InputStream containing text file
+     * @return The charset of the file, null if cannot be determined
+     * @throws IOException if some IO error occurs
+     */
+    public static String detectCharset(InputStream inputStream) throws IOException {
+        byte[] buf = new byte[4096];
+
+        UniversalDetector detector = new UniversalDetector(null);
+
+        int nread;
+        while ((nread = inputStream.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+        detector.dataEnd();
+
+        String encoding = detector.getDetectedCharset();
+        detector.reset();
+        return encoding;
+    }
 
 }
