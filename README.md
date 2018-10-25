@@ -213,3 +213,12 @@ the GNU General Public License Version 2 or later, or the GNU
 Lesser General Public License 2.1 or later.
 
 
+## Compatibility
+
+
+juniversalchardet requires JDK 7 or higher.
+
+For Android:
+
+- juniversalchardet 2.0.x requieres Android 4 (API Level 14)
+- juniversalchardet 2.1.x and newer requires Android 8 (API Level 26)
