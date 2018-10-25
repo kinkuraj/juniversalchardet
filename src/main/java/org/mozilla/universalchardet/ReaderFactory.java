@@ -50,8 +50,12 @@ public final class ReaderFactory {
 	 * @param defaultCharset defaultCharset to use if can't be determined
 	 */
 	public static Reader createReaderFromFile(File file, Charset defaultCharset) throws IOException {
-		String detectedEncoding = UniversalDetector.detectCharset(file);
+		if (defaultCharset == null) {
+			throw new NullPointerException("defaultCharset must be not null");
+			
+		}
 		Charset cs = defaultCharset;
+		String detectedEncoding = UniversalDetector.detectCharset(file);
 		if (detectedEncoding != null) {
 			cs = Charset.forName(detectedEncoding);
 		}
