@@ -182,6 +182,14 @@ Put this dependency in your pom.xml
 
 ```
 
+## Getting with gradle
+
+Put this line in your build.gradle
+
+```groovy
+implementation 'com.github.albfernandez:juniversalchardet:2.3.0'
+```
+
 ## Building from sources
 
 ```bash
