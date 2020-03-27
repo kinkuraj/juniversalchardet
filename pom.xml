@@ -67,34 +67,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<executions>
-					<execution>
-						<id>default-compile</id>
-						<configuration>
-							<release>${compiler.module.level}</release>
-						</configuration>
-					</execution>
-					<execution>
-						<id>base-compile</id>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-						<configuration>
-							<excludes>
-								<exclude>module-info.java</exclude>
-							</excludes>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<source>${compiler.level}</source>
-					<target>${compiler.level}</target>
-				</configuration>
-			</plugin>
+			
 
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
@@ -186,5 +159,70 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+	<profiles>
+		<profile>
+			<id>jdk8</id>
+			<activation>
+				<jdk>1.8</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.7.0</version>
+						<configuration>
+							<excludes>
+								<exclude>module-info.java</exclude>
+							</excludes>
+							<source>${compiler.level}</source>
+							<target>${compiler.level}</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jdk9on</id>
+			<activation>
+				<jdk>[9,)</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.8.1</version>
+						<executions>
+							<execution>
+								<id>default-compile</id>
+								<configuration>
+									<release>${compiler.module.level}</release>
+								</configuration>
+							</execution>
+							<execution>
+								<id>base-compile</id>
+								<goals>
+									<goal>compile</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<exclude>module-info.java</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+						<configuration>
+							<source>${compiler.level}</source>
+							<target>${compiler.level}</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
 
 </project>
