@@ -83,6 +83,7 @@ public class UniversalDetector
     private boolean     done;
     private boolean     start;
     private boolean     gotData;
+    private boolean     onlyPrintableASCII = true;
     private byte        lastChar;
     private String      detectedCharset;
 
@@ -191,6 +192,13 @@ public class UniversalDetector
                 if (this.inputState == InputState.PURE_ASCII &&
                     (c == 0x1B || (c == 0x7B && this.lastChar == 0x7E))) {
                     this.inputState = InputState.ESC_ASCII;
+                }
+                if (this.inputState == InputState.PURE_ASCII && onlyPrintableASCII) {
+                	onlyPrintableASCII =
+                			(c >= 0x20 && c <= 0x7e) // Printable characters 
+                			|| c == 0x0A  // New Line
+                			|| c == 0x0D  // Carriage return 
+                			|| c== 0x09;  // TAB
                 }
                 this.lastChar = buf[i];
             }
@@ -302,7 +310,7 @@ public class UniversalDetector
             }
         } else if (this.inputState == InputState.ESC_ASCII) {
             // do nothing
-        } else if (this.inputState == InputState.PURE_ASCII && this.gotData) {
+        } else if (this.inputState == InputState.PURE_ASCII && this.onlyPrintableASCII) {
         	this.detectedCharset = Constants.CHARSET_US_ASCCI;
         }
         else {
